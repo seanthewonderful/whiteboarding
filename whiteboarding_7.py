@@ -7,8 +7,6 @@ What’s your base case? How do you make progress towards the base case?
 """
 
 def recurse_length(lst):
-    # General idea to calculate length: 
-    # Iterate the list with a counter, increment at each element, when list ends return the counter total.
     
     #base case
     if len(lst) == 1:
@@ -22,7 +20,7 @@ def recurse_length(lst):
     # if not lst:
     #     return 0
 
-    # return 1 + get_length(lst[1:])
+    # return 1 + recurse_length(lst[1:])
     
     
 l1 = [1,2,3,4,5,6]
@@ -37,11 +35,7 @@ What’s a good base case for this function?
 """
 
 def recurse_printnums(max_num, i=0):
-    # General idea to print numbers 1-5:
-    # for _ in range(1,6): print(_)
-    # One step simpler: print numbers 1 through 4
-    # Believe my function will work for that part
-    # Now to solve the rest: print(5)
+
     
     # Base case
     if i == max_num:
@@ -87,16 +81,14 @@ def largest_num(lst, l=0):
     
     # Base case = list is empty so return l
     if not lst:
-        # print(f"Should return l: {l}")
         return l
-    else:
-        i = lst.pop()
-        if i > l:
-            l = i
-        # print(f"i: {i}")
-        # print(f"l: {l}")
-        # print(f"lst: {lst}")
-        return largest_num(lst, l=l)
+    
+    # else:
+    i = lst.pop()
+    if i > l:
+        l = i
+
+    return largest_num(lst, l)
 
 # Hackbright Solution:
 def max_num(nums, largest=None):
@@ -123,9 +115,6 @@ You can solve this by modifying the list in-place or by creating a new list (out
 
 def double_list_nums(lst, lst2=[]):
     # Base idea: for idx, num in enumerate(lst): lst[idx] = num * 2
-    # Recursion steps:
-    # 1. Break down problem into a problem that is 1 step smaller: How does this work here?
-    # 2. 3. n/a without solving 1. 
     
     # Base Case:
     if not lst:
