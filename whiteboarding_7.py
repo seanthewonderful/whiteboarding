@@ -21,10 +21,20 @@ def recurse_length(lst):
     #     return 0
 
     # return 1 + recurse_length(lst[1:])
+
+def recur(lst):
+    
+    if not lst:
+        return 0
+    else:
+        lst.pop()
+        
+    return 1 + recur(lst)
     
     
 l1 = [1,2,3,4,5,6]
 # print(f"Recursion to print list length: {recurse_length(l1)}")
+print(recur(l1))
 
 """ 
 Challenge 2:
@@ -36,7 +46,6 @@ What’s a good base case for this function?
 
 def recurse_printnums(max_num, i=0):
 
-    
     # Base case
     if i == max_num:
         return i
@@ -53,6 +62,13 @@ def print_nums(n=1):
     
     print(n)
     print_nums(n + 1)
+    
+# def vin(lst):
+#     if not lst:
+#         return
+#     for item in lst:
+#         print(item)
+#         recurse_length(lst[1:])
 
 # print("Recursion to print 1 - 5:")
 # recurse_printnums(5)
@@ -191,7 +207,7 @@ in: [1, [1, 2], 2, [3]]
 out: [1, 1, 2, 2, 3]
 
 Hint 1:
-You’ll need to use a for-loop somewhere.
+You’ll need to use a for-loop somewhere. (Not really though)
 """
 
 def flatten_list(lst, lst2=[]):
