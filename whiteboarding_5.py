@@ -1,4 +1,4 @@
-""" #4
+""" #1
 Define a Queue class and implement the following methods: __init__, enqueue, dequeue, and is_empty. Specify the runtime of all methods except __init__.
 
 Bonus: How can we implement the queue so that all three runtimes are O(1)?
@@ -165,7 +165,7 @@ new_ll.append_node(b)
 new_ll.append_node(c)
 
 
-""" #2
+""" #3
 Here’s a snippet from a linked list class:
 
 class LinkedList:
@@ -218,42 +218,98 @@ class LinkedList2:
         
         
 """ #5
-Here’s a snippet from a linked list class:
+Write a function that removes a node with a given value from a singly-linked list. It should return the head node. The function should take in two arguments:
 
-class LinkedList:
+head — the head of a linked list
+
+value — a value that you want to remove
+
+Hint 1:
+Remember, head is a Node instance that is assumed to be the head of a linked list.
+
+The nice thing about this is that you don’t have to worry about updating the head/tail of a LinkedList instance.
+Hint 2:
+Let’s say head.data is equivalent to value. How do we remove head from the linked list? You can remove it by returning head.next from your function.
+"""
+
+def remove_value(head, value):
+    if head.data == value:
+        return head.next
+
+    curr = head
+    while curr.next is not None:
+        if curr.next.data == value:
+            curr.next = curr.next.next
+            break
+
+        curr = curr.next
+
+    return head
+
+""" #6
+Here’s a snippet from a doubly-linked list class:
+
+class DblLinkedList:
     def __init__(self):
         self.head = None
         self.tail = None
-Write a method for this class called append. It should take in a node instance and add it to the end of the linked list.
-
-Remember to account for appending to an empty list.
+Write a method for this class called remove. It should take in a node instance and remove it from the list.
 
 Hint 1:
-Your linked list has a pointer to its tail.
+Remember — you already have the node that needs to be removed, which means you can do this in O(1) time.
 Hint 2:
-Have you tried drawing a diagram of a linked list?
+You need to update two attributes on the node — node.prev and node.next.
 Hint 3:
-If self.tail is None, that means the list is empty. In this case, you should update self.tail and self.head so they point to the node you want to append.
+If node.prev is None, it means node is the head of the list. To remove it, we just need to reassign self.head to the next node.
 
-Otherwise, self.tail.next should point to the node you want to append. Then, update self.tail so it points to the correct node.
+Otherwise, reassign the previous node’s next attribute to node.next.
+
+If node.next is None, it means node is the tail of the list. To remove it, reassign self.tail to the previous node.
+
+Otherwise, reassign the next node’s next attribute to node.prev.
 """
 
-def append(self, node):
-  
-  if not self.head:
-    self.head = node
-    self.tail = node
-    
-  else:
-    self.tail.next = node
-    self.tail = node
-    
+def remove(self, node):
+    if node.prev is None:
+        # If node.prev is None, it means this node is the head of
+        # the list. To remove it, just reassign self.head to the next
+        # node
+        self.head = node.next
+    else:
+        node.prev.next = node.next
 
-def append2(self, node):
-  
-  if self.tail is None:
-    self.tail = self.head = node
-    
-  else:
-    self.tail.next = node
-    self.tail = node
+    if node.next is None:
+        # If node.next is None, it means this node is the tail of
+        # the list. To remove it, reassign self.tail to the previous
+        # node
+        self.tail = node.prev
+    else:
+        node.next.prev = node.prev
+
+""" #7
+Write a function that takes in the head of a singly-linked list. It should return True if two nodes with the same data appear consecutively.
+
+Example test cases:
+
+in: 1 → 2 → 2
+out: True
+
+in: 1 → 2 → 1
+out: False
+
+Hint 1:
+As you iterate through the list, you need to keep a reference to the node before the current one.
+"""
+
+def has_consecutive(head):
+    if head is None:
+        return False
+
+    current = head
+
+    while current.next is not None:
+        if current.data == current.next.data:
+            return True
+
+        current = current.next
+    return False
