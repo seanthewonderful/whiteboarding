@@ -1,4 +1,4 @@
-""" #1
+""" #4
 Define a Queue class and implement the following methods: __init__, enqueue, dequeue, and is_empty. Specify the runtime of all methods except __init__.
 
 Bonus: How can we implement the queue so that all three runtimes are O(1)?
@@ -45,12 +45,15 @@ Part 1: Define a class for a linked list node.
 Part 2: Write a function that takes in the head node of a linked list and prints the data of every node in the list.
 """
 class Node:
-  def __init__(self, data, next=None):
-    self.data = data
-    self.next = next
-
-  def __repr__(self):
-    return f"Node object. Data: {self.data}. Next node = {self.next}"
+    def __init__(self, data, next=None):
+        self.data = data
+        self.next = next
+    
+    def __str__(self):
+        return str(self.data)
+      
+    def __repr__(self):
+        return f"<Node object. Data: {self.data}. Next node = {self.next}>"
 
 
 def print_linked_list(head):
@@ -59,30 +62,95 @@ def print_linked_list(head):
     print(current.data)
     current = current.next
 
-class LinkedList:
-  def __init__(self, head=None):
-    self.head = head
 
-  def append_node(self, node):
-    if self.head == None:
-      self.head = node
-    else:
-      current = self.head
-      while current.next is not None:
-        current = current.next
-      current.next = node
 
-  def print_nodes(self):
-    if self.head == None:
-      return "Empty list"
-      
-    current = self.head
-    while current is not None:
-      print(current.data)
-      current = current.next
+class LinkedListNoTail:
+    """Create a new Linked List with a head"""
+    
+    def __init__(self, head=None):
+        """Initialize a new Linked List"""
+        
+        self.head = head
+    
+    def print_list(self):
+        """Print all items in the list"""
+        # Want to keep track of current node, reset in loop
+        current = self.head
+        
+        while current:
+            print(current)
+            current = current.next
+            
+    def find(self, value):
+        """Return T/F whether a value exists in LL"""
+        current = self.head
+        
+        while current:
+            if current.data == value:
+                return True
+            current = current.next
+            
+        return False
+            
+    def append(self, data):
+        """Append new node to end of list"""
+        
+        new_node = Node(data)
+        
+        if not self.head:
+            self.head = new_node
+        
+        else:
+            current = self.head
+            while current:
+                
+                if current.next == None:
+                    current.next = new_node
+                    return
+                
+                current = current.next
+            
+    # def append(self, data):
+    #     """Append new node to end of list"""
+        
+    #     new_node = Node(data)
+        
+    #     current = self.head
+        
+    #     if not current:
+    #         self.head = new_node
+        
+    #     else:
+    #         while current.next:
+                
+    #             current = current.next
+            
+    #         current.next = new_node
+    
+    def remove_node(self, value):
+        """Remove a specific node that matches value"""
+        
+        # Empty LL?
+        if not self.head:
+            return "List empty"
+        
+        # head == value?
+        if self.head.data == value:
+            self.head = self.head.next
+            return
+        
+        # else, let's keep track of where we are
+        current = self.head
+        
+        while current.next:
+            if current.next.data == value:
+                current.next = current.next.next
+                return
+            
+            current = current.next
 
-  def __repr__(self):
-    return f"Linked List object. Head node: {self.head}"
+    def __repr__(self):
+      return f"Linked List object. Head node: {self.head}"
 
 
 a = Node("a")
@@ -97,7 +165,7 @@ new_ll.append_node(b)
 new_ll.append_node(c)
 
 
-""" #3
+""" #2
 Here’s a snippet from a linked list class:
 
 class LinkedList:
@@ -116,7 +184,7 @@ def print_odd_nodes(self):
   i = 0
   curr = self.head
 
-  while curr is not None:
+  while curr:
     if i % 2 != 0:
         print(curr.data)
 
@@ -138,14 +206,15 @@ class LinkedList2:
     def append_node(self, node):
       # is list empty? --self.tail = None
       
-      if self.tail is not None:
-        self.tail.next = self.tail = node
-        # self.tail.next = node
-        # self.tail = node
+      if self.tail:
+        # self.tail.next = self.tail = node
+        self.tail.next = node
+        self.tail = node
 
       else:
-
-        self.head = self.tail = node
+        self.head = node
+        self.tail = node
+        # self.head = self.tail = node
         
         
 """ #5
