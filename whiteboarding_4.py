@@ -24,8 +24,7 @@ def snake_cc(phrase):
                 else:
                     new_str += char
                     
-    return new_str
-                
+    return new_str         
 
 def snake_to_camel(string):
     
@@ -84,9 +83,7 @@ def erin_letter_dict(phrase):
     words_by_length = {}
     
     for word in split_phrase:
-        
-        length = len(word)
-        words_by_length[length] = (words_by_length.get(length, set(word))).add(word)
+        words_by_length[len(word)] = (words_by_length.get(len(word), set())).add(word)
     
     return words_by_length
 
@@ -107,7 +104,7 @@ def make_word_length_dict(dict_str):
     return words_by_length
 
 
-""" #3
+""" #5
 Write a function that takes in a list and reverses it in-place (without creating a new list).
 
 Hint:
@@ -138,6 +135,8 @@ Write a function that takes in two strings and returns True if the strings are a
 
 "moon", "noom" => True
 "bat", "snack" => False
+"secure", "rescue" => True
+
 "", "" => True
 """
 

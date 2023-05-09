@@ -5,16 +5,24 @@ Write a function that takes in two arguments: a list of numbers and a number. It
 """
 
 def largest_smaller(nums, n):
-    result = None
+  result = None
 
-    for num in nums:
-        if num < n:
-            if not result or result < num:
-                result = num
+  for num in nums:
+    if num < n:
+      if not result or result < num:
+        result = num
 
-    return result
+  return result
 
 def largest_smaller2(nums, n):
+  largest = 0
+  for num in nums:
+    if (num < n and num > largest):
+      largest = num
+
+  return largest
+
+def largest_smaller3(nums, n):
   new_nums = []
 # start a loop through the nums list
   for num in nums:
@@ -23,15 +31,6 @@ def largest_smaller2(nums, n):
       new_nums.append(num)
 
   return max(new_nums)
-
-
-def largest_smaller3(nums, n):
-  largest = 0
-  for num in nums:
-    if (num < n and num > largest):
-      largest = num
-
-  return largest
 
 """ #2
 Write a function that takes in a list of numbers. It should return True if any two numbers in the list add to 0.
@@ -44,6 +43,13 @@ def add_to_zero(nums):
         if -n in nums_set:
             return True
 
+    return False
+  
+def pair_adding_to_zero(numbers):
+    for i, num1 in enumerate(numbers):
+        for j, num2 in enumerate(numbers[i+1:], i+1):
+            if num1 + num2 == 0:
+                return True
     return False
 
 
@@ -91,29 +97,49 @@ Hint:
 One way to do this is to (ab)use the fact that you can typecast an integer into a string.
 """
 
-def reverse_digits(n):
-    rev_digits = reversed(str(n))
+def reverse_digits(num):
+  
+    rev_digits = reversed(str(num))
 
     return int("".join(rev_digits))
 
-    # n_string = str(n)
-    # reverse_n_str = ""
+def reverse_digits2(num):
+  
+    num_string = str(num)
+    reverse_num_str = ""
 
-    # for i in range(len(n_string)-1, -1, -1):
-    #   reverse_n_str += n_string[i]
+    for i in range(len(num_string)-1, -1, -1):
+      reverse_num_str += num_string[i]
 
-    # return int(reverse_n_str)
-
-    # return int(str(n)[::-1])
+    return int(reverse_num_str)
     
-def reverse_order(num):
+def reverse_digits3(num):
 
-    # reversed_str = str(num)[::-1]
-    # reversed_str = int(reversed_str)
+    reversed_str = str(num)[::-1]
+    reversed_str = int(reversed_str)
 
-    # return reversed_str
-  return int(str(num)[::-1])
+    return reversed_str
+    # return int(str(num)[::-1])
 
+def reverse_digits4(num):
+  
+  rev_list = []
+  new_num = list(str(num))
+  
+  while new_num:
+    rev_list.append(new_num.pop())
+    
+  return int("".join(rev_list))
+
+def reverse_digits5(num):
+  
+  letters = list(str(num))
+  
+  r = reversed(letters)
+  
+  return int("".join(r))
+  
+  
 """ #5
 Write a function that takes in a string. It should return a string where consecutive repeating characters have been truncated. For example:
 
@@ -135,5 +161,28 @@ def v_truncate(string):
     
     for i in range(1, len(str)):
         if (string[i] == 100):
-            return True
+            pass
         
+def truncate_string(string):
+    chars_to_keep = [string[0]]
+
+    i = 0
+    for i in range(len(string) - 1):
+      if string[i] == string[i+1]:
+         i += 1
+      elif string[i] != string[i+1]:
+         chars_to_keep.append(string[i+1])
+         i += 1
+
+    truncated_string = "".join(chars_to_keep)
+   
+    return truncated_string
+  
+# def truncate(string):
+#   if not string:
+#     return string
+#   result = string[0]
+#   for i in range(1, len(string)):
+#     if s[i] != s[I-1]:
+#       result += s[i]
+#   return result

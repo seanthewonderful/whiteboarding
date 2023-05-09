@@ -65,7 +65,7 @@ def replace_vowels(string):
       new_string += i
 
   return new_string
-  # Replace vowels with * by using their index?
+  # Replace vowels with * by using their index? --> TypeError: 'str' object does not support item assignment
 
 
 """Write a function that takes in a string and returns all unique characters in the string"""
