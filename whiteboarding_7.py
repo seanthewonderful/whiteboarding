@@ -147,7 +147,7 @@ def double_list_inplace(lst, idx=0):
     
     lst[idx] *= 2
     
-    return double_list_inplace(lst, idx= idx + 1)
+    return double_list_inplace(lst, idx=idx+1)
 
 # Hackbright Solution:
 def double_nums(nums):
@@ -221,7 +221,7 @@ def flatten_list(lst, lst2=[]):
         return lst2
         
     if type(lst[0]) == list:
-        flatten_list(lst[0])
+        flatten_list(lst[0], lst2=lst2)
     else:
         lst2.append(lst[0])
     
@@ -239,5 +239,15 @@ def flatten(lst, result=None):
 
     return result
 
+def flatten_no_loop(lst):
+    if not lst:
+        return []
+
+    if isinstance(lst[0], list):
+        return flatten_no_loop(lst[0]) + flatten_no_loop(lst[1:])
+
+    return [lst[0]] + flatten_no_loop(lst[1:])
+
 fl = [1, 2, [3, 4, 5], 6, [7, 8, [8, 7]], 9]
 # print(flatten_list(fl))
+

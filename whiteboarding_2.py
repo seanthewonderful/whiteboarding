@@ -2,17 +2,19 @@
 
 def longest_string(strings):
 
-  # Initial questions = Can list of strings be empty?
-  # How shall I return a result if multiple strings have the same length in the list? 
+    # Initial questions = Can list of strings be empty?
+    # How shall I return a result if multiple strings have the same length in the list? 
+    
+    # Set empty string to represent current longest string
+    longest = ""
+    # Loop through strings, if longer than 'longest' then reset 'longest' to that string
+    for string in strings:
+        if len(string) > len(longest):
+            longest = string
+    # Once loop is complete, we have the longest string set to 'longest' and return it
+    return longest
   
-  # Set empty string to represent current longest string
-  longest = ""
-  # Loop through strings, if longer than 'longest' then reset 'longest' to that string
-  for string in strings:
-    if len(string) > len(longest):
-      longest = string
-  # Once loop is complete, we have the longest string set to 'longest' and return it
-  return longest
+string_list = ["apple", "cat", "pear", "super duper", "pumpkin"]
 
 """Write a function that takes in an item and a list. Return the number of times the given item appears in the list."""
 

@@ -48,6 +48,10 @@ For example, given a list of numbers, in random order, of 1..10, 8 was removed. 
 
 >>> missing_number([2, 1, 4, 3, 6, 5, 7, 10, 9], 10)
 8
+>>> missing_number([4,3,2,1], 4)
+0
+>>> missing_number([5,4,7,3,6,2], 7)
+1
 The function should run in O(n) time.
 
 Hint:
@@ -69,9 +73,14 @@ def find_missing_num(nums, max_num):
 def find_missing_num_sum(nums, max_num):
     
     lst_sum = sum(nums)
-    max_sum = int((max_num**2 + max_num) / 2)
+    max_sum = int((max_num ** 2 + max_num) / 2)
 
     return max_sum - lst_sum
+
+# use new data types
+# consider runtimes
+
+
 
 # Not sure if this works yet
 # def find_missing_num_dict(nums, max_num):

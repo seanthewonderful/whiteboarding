@@ -55,11 +55,9 @@ def staircase_hb(n):
         
 def build_staircase(n):
     
-    stair = "#"
-    
     for i in range(1, n+1):
         
-        print(" "*(n-i) + stair*i)
+        print(" "*(n-i) + "#"*i)
 
 # staircase(7)
 # staircase_hb(7)
@@ -229,6 +227,7 @@ class BinarySearchNode:
                 self.left = new_node
             else:
                 self.left.insert_recursive(new_node)
+                
 
 """ #4
 Given the following Node class:
@@ -372,3 +371,97 @@ def allowed_requests(request_timestamps, max_requests):
             results.append(False)
 
     return results
+
+
+""" #7
+Given a 2D grid which represents a map of “1”s (land) and “0”s (water), return the number of islands. An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. You may assume all four edges of the grid are all surrounded by water.
+
+Examples:
+
+Input: grid = [
+  ["1","1","1","1","0"],
+  ["1","1","0","1","0"],
+  ["1","1","0","0","0"],
+  ["0","0","0","0","0"]
+]
+Output: 1
+
+Input: grid = [
+  ["1","1","0","0","0"],
+  ["1","1","0","0","0"],
+  ["0","0","1","0","0"],
+  ["0","0","0","1","1"]
+]
+Output: 3
+
+Hint 1: This is a graph problem, though it may not look like one. Each set of coordinates (row, col) in the grid is a node, and the adjacent nodes are the neighbors above, below, and to the left and right. See the hint for the Low Points problem for how to iterate through a 2D grid.
+
+Hint 2: 
+Use DFS or BFS to traverse each island, and keep a count of the number of islands.
+"""
+
+def get_neighbors(row, col):
+    return [(row + 1, col), (row - 1, col), (row, col + 1), (row, col - 1)]
+    
+def num_islands(grid):
+    visited_islands = set()
+    island_count = 0
+    for start_row in range(len(grid)):
+        for start_col in range(len(grid[0])):
+            if (
+                grid[start_row][start_col] == "1"
+                and (start_row, start_col) not in visited_islands
+            ):
+                island_count += 1
+                to_visit = [(start_row, start_col)]
+
+                while to_visit:
+                    current_row, current_col = to_visit.pop()
+                
+                    for row, col in get_neighbors(current_row, current_col):
+                        if row < 0 or col < 0 or row >= len(grid) or col >= len(grid[0]):
+                            continue  # out of bounds!
+                        if grid[row][col] == "1" and (row, col) not in visited_islands:
+                            to_visit.append((row, col))
+                            visited_islands.add((row, col))
+
+    return island_count
+
+
+# Recursive solution
+
+def num_islands_recursive(grid):  # grid is a list of lists
+    visited_islands = set()
+
+    # By making this an inner function, we can also access the variables
+    # grid and visited_islands.
+    # We can make it a separate function, but then we'd have to pass in
+    # grid and visited_islands as additional parameters.
+    def visit_whole_island(row, col):
+       
+        if row < 0 or col < 0 or row >= len(grid) or col >= len(grid[0]):
+            return  # out of bounds!
+        if (row, col) in visited_islands:
+            return
+
+        if grid[row][col] == "1":
+            visited_islands.add((row, col))
+            # Top
+            visit_whole_island(row - 1, col)
+            # Bottom
+            visit_whole_island(row + 1, col)
+            # Left
+            visit_whole_island(row, col - 1)
+            # Right
+            visit_whole_island(row, col + 1)
+
+    island_count = 0
+    for start_row in range(len(grid)):
+        for start_col in range(len(grid[0])):
+            if (
+                grid[start_row][start_col] == "1"
+                and (start_row, start_col) not in visited_islands
+            ):
+                island_count += 1
+                visit_whole_island(start_row, start_col)
+    return island_count
