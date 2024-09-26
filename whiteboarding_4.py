@@ -104,7 +104,7 @@ def make_word_length_dict(dict_str):
     return words_by_length
 
 
-""" #5
+""" #3
 Write a function that takes in a list and reverses it in-place (without creating a new list).
 
 Hint:

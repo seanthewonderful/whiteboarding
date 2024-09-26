@@ -155,13 +155,6 @@ def truncate_repeats(string):
             new_str += c
     
     return new_str
-
-def v_truncate(string):
-    new_str = ""
-    
-    for i in range(1, len(str)):
-        if (string[i] == 100):
-            pass
         
 def truncate_string(string):
     chars_to_keep = [string[0]]
@@ -169,13 +162,13 @@ def truncate_string(string):
     i = 0
     for i in range(len(string) - 1):
       if string[i] == string[i+1]:
-         i += 1
+        i += 1
       elif string[i] != string[i+1]:
-         chars_to_keep.append(string[i+1])
-         i += 1
+        chars_to_keep.append(string[i+1])
+        i += 1
 
     truncated_string = "".join(chars_to_keep)
-   
+    
     return truncated_string
   
 # def truncate(string):
